@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Litter Identification</title>
+</head>
+<body>
+    <link rel="stylesheet" href="styles.css" />
+    <div id="canvas">
+        <img id="imageID" style="max-height:100%; max-width: 100%" draggable="false" user-select="none" />
+    </div>
+    <p class="centerP">
+        Identify the objects in this image
+    </p>
+        <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
+  <br/>
+  <p class="centerP">
+   <input type="checkbox" id="Glass" name="Glass" value="Glass">
+   <label for="Glass"> Glass</label><br>
+   <input type="checkbox" id="Plastic" name="Plastic" value="Plastic">
+   <label for="Plastic"> Plastic</label><br>
+   <input type="checkbox" id="Aluminum" name="Aluminum" value="Aluminum">
+   <label for="Aluminum"> Aluminum</label><br>
+   <input type="checkbox" id="Paper" name="Paper" value="Paper">
+   <label for="Paper"> Paper</label><br>
+   <input type="checkbox" id="Food" name="Food" value="Food">
+   <label for="Food"> Food Waste</label><br>
+
+
+  </p>
+  <br/>
+    <p class="centerP">
+        <button id="agree" class="btn" onclick="answer()" style="background-color:#00688B">Continue</button>
+    </p>
+        <!--<button id="clearBtn" class="btn" onclick="clearBoxes()">Clear Boxes</button>-->
+</body>
+</html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    var i = -1;
+    var delay = false;
+    var userAns = [];
+
+
+    var batch_1 = ["000004", "000005", "000010", "000011", "000012", "000014", "000015", "000017", "000019", "000021", "000023", "000025", "000027", "000030", "000062", "000071", "000072", "000074", "000081", "000083", "000084", "000086", "000092", "000099", "000102", "000110", "000111", "000115", "000117", "000118", "000121", "000128"]
+    var batch_2 = ["000001", "000012", "000013", "000018", "000020", "000025", "000026", "000029", "000033", "000035", "000036", "000038", "000039", "000040", "000041", "000068", "000086"]
+    var batch_3 = ["IMG_4855", "IMG_4862", "IMG_4893", "IMG_4902", "IMG_4924", "IMG_4941", "IMG_4948", "IMG_4963", "IMG_4967", "IMG_4969", "IMG_4978", "IMG_4994", "IMG_4997", "IMG_5055", "IMG_5057"]
+    var batch_4 = ["000004", "000015", "000023", "000026", "000039", "000053", "000068", "000079", "000080", "000082"]
+    var batch_5 = ["000000", "000011", "000013", "000025", "000027", "000036", "000039", "000052", "000064", "000070", "000079", "000092", "000098", "000099", "000102"]
+    var batch_6 = ["000000", "000006", "000014", "000018", "000027", "000032", "000034", "000036", "000052", "000055", "000062", "000064", "000066", "000082", "000083", "000087", "000094", "000099", "0000101", "0000102"]
+    var times = []
+    var numImages = batch_1.length + batch_2.length + batch_3.length + batch_4.length + batch_5.length + batch_6.length
+    document.getElementById("imageID").src = "images/ready.jpg"
+
+    var today = new Date();
+
+    function answer() {
+      if (delay == false) {
+        userDiff = 0
+        nextImg()
+      }
+    }
+
+    function nextImg() {
+        if (i == numImages - 1) {
+          if(i != 0) {
+            times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
+            var array = []
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            for (var j = 0; j < checkboxes.length; j++) {
+              array.push(checkboxes[j].value)
+            }
+            userAns.push(array)
+          }
+          uncheckElements()
+          //Push files to server
+          output.id = "P" + Math.random().toString(36).substr(2, 9);
+          output.times = times;
+          output.userAns = userAns;
+          $.ajax({
+            type : "POST",
+            url : "json.php",
+            data : {
+                json : JSON.stringify(output)
+            }
+          });
+
+        }
+        else {
+            console.log(++i)
+            if (i < batch_1.length) {
+              document.getElementById("imageID").src = "images/batch_1/" + batch_1[i] + ".jpg"
+            }
+            else if (i - batch_1.length < batch_2.length) {
+              document.getElementById("imageID").src = "images/batch_2/" + batch_2[i - batch_1.length] + ".jpg"
+            }
+            else if (i - batch_1.length - batch_2.length < batch_3.length) {
+              document.getElementById("imageID").src = "images/batch_3/" + batch_3[i - batch_1.length - batch_2.length] + ".jpg"
+            }
+            else if (i - batch_1.length - batch_2.length - batch_3.length < batch_4.length) {
+              document.getElementById("imageID").src = "images/batch_4/" + batch_4[i - batch_1.length - batch_2.length - batch_3.length] + ".jpg"
+            }
+            else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length < batch_5.length) {
+              document.getElementById("imageID").src = "images/batch_5/" + batch_5[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length] + ".jpg"
+            }
+            else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length < batch_6.length) {
+              document.getElementById("imageID").src = "images/batch_6/" + batch_6[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length] + ".jpg"
+            }
+            else {
+              alert("Image ID Out of Bounds")
+              console.log(i)
+            }
+            if(i != 0) {
+              times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
+              var array = []
+              var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+              for (var j = 0; j < checkboxes.length; j++) {
+                array.push(checkboxes[j].value)
+              }
+              userAns.push(array)
+            }
+            uncheckElements()
+        }
+    }
+
+    function uncheckElements() //https://stackoverflow.com/questions/15640087/javascript-unchecking-all-checkboxes/58286680#58286680
+    {
+     var uncheck=document.getElementsByTagName('input');
+     for(var i=0;i<uncheck.length;i++)
+     {
+      if(uncheck[i].type=='checkbox')
+      {
+       uncheck[i].checked=false;
+      }
+     }
+    }
+
+</script>

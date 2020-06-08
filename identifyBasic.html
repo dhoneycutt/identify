@@ -17,6 +17,7 @@
         Identify the objects in this image
     </p>
     <p id="finished" class="centerP">
+      <br/><br/><br/>
         Thank you for your participation!
     </p>
         <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
@@ -72,7 +73,8 @@
     var batch_5 = ["000000", "000011", "000013", "000025", "000027", "000036", "000039", "000052", "000064", "000070", "000079", "000092", "000098", "000099", "000102"]
     var batch_6 = ["000000", "000006", "000014", "000018", "000027", "000032", "000034", "000036", "000052", "000055", "000062", "000064", "000066", "000082", "000083", "000087", "000094", "000099", "000101", "000102"]
     var times = []
-    var numImages = batch_1.length + batch_2.length + batch_3.length + batch_4.length + batch_5.length + batch_6.length
+    //var numImages = batch_1.length + batch_2.length + batch_3.length + batch_4.length + batch_5.length + batch_6.length
+    var numImages = 10
     document.getElementById("imageID").src = "images/ready.jpg"
 
     var today = new Date();
@@ -85,6 +87,7 @@
     }
 
     function nextImg() {
+      cont=0
         if (i == numImages - 1) {
           if(i != 0) {
             times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
@@ -93,53 +96,43 @@
             for (var j = 0; j < checkboxes.length; j++) {
               array.push(checkboxes[j].value)
             }
-            userAns.push(array)
-          }
-          uncheckElements()
-          //Push files to server
-          output = {}
-          output.id = "P" + Math.random().toString(36).substr(2, 9);
-          output.times = times;
-          output.userAns = userAns;
-          $.ajax({
-            type : "POST",
-            url : "json.php",
-            data : {
-                json : JSON.stringify(output)
+            if(array == [])
+            {
+              alert("You must select an option")
             }
-          });
-          //window.location.href = "identifyEnd.html"
-          document.getElementById("checks").style.display = "none"
-          document.getElementById("texthere").style.display = "none"
-          document.getElementById("agree").style.display = "none"
-          document.getElementById("canvas").style.display = "none"
-          document.getElementById("finished").style.display = "block"
+            else {
+              userAns.push(array)
+              cont=1
+            }
+
+          }
+          if(cont==1) {
+            uncheckElements()
+            //Push files to server
+            output = {}
+            output.id = "P" + Math.random().toString(36).substr(2, 9);
+            output.times = times;
+            output.userAns = userAns;
+            $.ajax({
+              type : "POST",
+              url : "json.php",
+              data : {
+                  json : JSON.stringify(output)
+              }
+            });
+            //window.location.href = "identifyEnd.html"
+            document.getElementById("checks").style.display = "none"
+            document.getElementById("texthere").style.display = "none"
+            document.getElementById("agree").style.display = "none"
+            document.getElementById("position").style.display = "none"
+            document.getElementById("canvas").style.display = "none"
+            document.getElementById("finished").style.display = "block"
+
+          }
 
         }
         else {
             console.log(++i)
-            if (i < batch_1.length) {
-              document.getElementById("imageID").src = "images/batch_1/" + batch_1[i] + ".JPG"
-            }
-            else if (i - batch_1.length < batch_2.length) {
-              document.getElementById("imageID").src = "images/batch_2/" + batch_2[i - batch_1.length] + ".JPG"
-            }
-            else if (i - batch_1.length - batch_2.length < batch_3.length) {
-              document.getElementById("imageID").src = "images/batch_3/" + batch_3[i - batch_1.length - batch_2.length] + ".JPG"
-            }
-            else if (i - batch_1.length - batch_2.length - batch_3.length < batch_4.length) {
-              document.getElementById("imageID").src = "images/batch_4/" + batch_4[i - batch_1.length - batch_2.length - batch_3.length] + ".JPG"
-            }
-            else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length < batch_5.length) {
-              document.getElementById("imageID").src = "images/batch_5/" + batch_5[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length] + ".JPG"
-            }
-            else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length < batch_6.length) {
-              document.getElementById("imageID").src = "images/batch_6/" + batch_6[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length] + ".JPG"
-            }
-            else {
-              alert("Image ID Out of Bounds")
-              console.log(i)
-            }
             if(i != 0) {
               times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
               var array = []
@@ -147,11 +140,44 @@
               for (var j = 0; j < checkboxes.length; j++) {
                 array.push(checkboxes[j].value)
               }
-              userAns.push(array)
+              if(array == []) {
+                i--
+                alert("You must select an option")
+              }
+              else {
+                cont=1
+                userAns.push(array)
+              }
+
             }
-            uncheckElements()
-            k = i+1
-            document.getElementById("position").innerHTML = "Image " + k + "/" + numImages
+            if(cont==1) {
+              if (i < batch_1.length) {
+                document.getElementById("imageID").src = "images/batch_1/" + batch_1[i] + ".JPG"
+              }
+              else if (i - batch_1.length < batch_2.length) {
+                document.getElementById("imageID").src = "images/batch_2/" + batch_2[i - batch_1.length] + ".JPG"
+              }
+              else if (i - batch_1.length - batch_2.length < batch_3.length) {
+                document.getElementById("imageID").src = "images/batch_3/" + batch_3[i - batch_1.length - batch_2.length] + ".JPG"
+              }
+              else if (i - batch_1.length - batch_2.length - batch_3.length < batch_4.length) {
+                document.getElementById("imageID").src = "images/batch_4/" + batch_4[i - batch_1.length - batch_2.length - batch_3.length] + ".JPG"
+              }
+              else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length < batch_5.length) {
+                document.getElementById("imageID").src = "images/batch_5/" + batch_5[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length] + ".JPG"
+              }
+              else if (i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length < batch_6.length) {
+                document.getElementById("imageID").src = "images/batch_6/" + batch_6[i - batch_1.length - batch_2.length - batch_3.length - batch_4.length - batch_5.length] + ".JPG"
+              }
+              else {
+                alert("Image ID Out of Bounds")
+                console.log(i)
+              }
+
+              uncheckElements()
+              k = i+1
+              document.getElementById("position").innerHTML = "Image " + k + "/" + numImages
+            }
         }
     }
 

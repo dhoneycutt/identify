@@ -7,26 +7,42 @@
 </head>
 <body>
     <link rel="stylesheet" href="styles.css" />
+    <p id="position" class="centerP">
+
+    </p>
     <div id="canvas">
         <img id="imageID" style="max-height:100%; max-width: 100%" draggable="false" user-select="none" />
     </div>
-    <p class="centerP">
+    <p id="texthere" class="centerP">
         Identify the objects in this image
     </p>
         <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
   <br/>
-  <p class="centerP">
-   <input type="checkbox" id="Glass" name="Glass" value="Glass">
-   <label for="Glass"> Glass</label><br>
-   <input type="checkbox" id="Plastic" name="Plastic" value="Plastic">
-   <label for="Plastic"> Plastic</label><br>
-   <input type="checkbox" id="Aluminum" name="Aluminum" value="Aluminum">
-   <label for="Aluminum"> Aluminum</label><br>
-   <input type="checkbox" id="Paper" name="Paper" value="Paper">
-   <label for="Paper"> Paper</label><br>
-   <input type="checkbox" id="Food" name="Food" value="Food">
-   <label for="Food"> Food Waste</label><br>
-
+  <p id="checks" class="centerP">
+   <input type="checkbox" id="unbrokenGlass" name="unbrokenGlass" value="unbrokenGlass">
+   <label for="unbrokenGlass"> Unbroken Glass</label><br>
+   <input type="checkbox" id="brokenGlass" name="brokenGlass" value="brokenGlass">
+   <label for="brokenGlass"> Broken Glass</label><br>
+   <input type="checkbox" id="bagWrapper" name="bagWrapper" value="bagWrapper">
+   <label for="bagWrapper"> Plastic Bag/Wrapper</label><br>
+   <input type="checkbox" id="plasticContainer" name="plasticContainer" value="plasticContainer">
+   <label for="plasticContainer"> Plastic Container</label><br>
+   <input type="checkbox" id="plastic" name="plastic" value="plastic">
+   <label for="plastic"> Other Plastic</label><br>
+   <input type="checkbox" id="aluminumCan" name="aluminumCan" value="aluminumCan">
+   <label for="aluminumCan"> Aluminum Can</label><br>
+   <input type="checkbox" id="aluminum" name="aluminum" value="aluminum">
+   <label for="aluminum"> Other Aluminum</label><br>
+   <input type="checkbox" id="paperBag" name="paperBag" value="paperBag">
+   <label for="paperBag"> Paper Bag</label><br>
+   <input type="checkbox" id="paper" name="paper" value="paper">
+   <label for="paper"> Other Paper</label><br>
+   <input type="checkbox" id="food" name="food" value="food">
+   <label for="food"> Food Waste</label><br>
+   <input type="checkbox" id="other" name="other" value="other">
+   <label for="other"> Other Trash</label><br>
+   <input type="checkbox" id="dontknow" name="dontknow" value="dontknow">
+   <label for="dontknow"> I Don't Know</label><br>
 
   </p>
   <br/>
@@ -42,14 +58,15 @@
     var i = -1;
     var delay = false;
     var userAns = [];
-
+    document.getElementById("checks").style.display = "none"
+    document.getElementById("texthere").style.display = "none"
 
     var batch_1 = ["000004", "000005", "000010", "000011", "000012", "000014", "000015", "000017", "000019", "000021", "000023", "000025", "000027", "000030", "000062", "000071", "000072", "000074", "000081", "000083", "000084", "000086", "000092", "000099", "000102", "000110", "000111", "000115", "000117", "000118", "000121", "000128"]
     var batch_2 = ["000001", "000012", "000013", "000018", "000020", "000025", "000026", "000029", "000033", "000035", "000036", "000038", "000039", "000040", "000041", "000068", "000086"]
     var batch_3 = ["IMG_4855", "IMG_4862", "IMG_4893", "IMG_4902", "IMG_4924", "IMG_4941", "IMG_4948", "IMG_4963", "IMG_4967", "IMG_4969", "IMG_4978", "IMG_4994", "IMG_4997", "IMG_5055", "IMG_5057"]
-    var batch_4 = ["000004", "000015", "000023", "000026", "000039", "000053", "000068", "000079", "000080", "000082"]
+    var batch_4 = ["000007", "000015", "000023", "000026", "000039", "000053", "000068", "000079", "000080", "000082"]
     var batch_5 = ["000000", "000011", "000013", "000025", "000027", "000036", "000039", "000052", "000064", "000070", "000079", "000092", "000098", "000099", "000102"]
-    var batch_6 = ["000000", "000006", "000014", "000018", "000027", "000032", "000034", "000036", "000052", "000055", "000062", "000064", "000066", "000082", "000083", "000087", "000094", "000099", "0000101", "0000102"]
+    var batch_6 = ["000000", "000006", "000014", "000018", "000027", "000032", "000034", "000036", "000052", "000055", "000062", "000064", "000066", "000082", "000083", "000087", "000094", "000099", "000101", "000102"]
     var times = []
     var numImages = batch_1.length + batch_2.length + batch_3.length + batch_4.length + batch_5.length + batch_6.length
     document.getElementById("imageID").src = "images/ready.jpg"
@@ -87,6 +104,7 @@
                 json : JSON.stringify(output)
             }
           });
+          window.location.href = "identifyEnd.html"
 
         }
         else {
@@ -123,11 +141,15 @@
               userAns.push(array)
             }
             uncheckElements()
+            k = i+1
+            document.getElementById("position").innerHTML = "Image " + k + "/" + numImages
         }
     }
 
     function uncheckElements() //https://stackoverflow.com/questions/15640087/javascript-unchecking-all-checkboxes/58286680#58286680
     {
+      document.getElementById("checks").style.display = "block"
+      document.getElementById("texthere").style.display = "block"
      var uncheck=document.getElementsByTagName('input');
      for(var i=0;i<uncheck.length;i++)
      {

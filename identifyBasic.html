@@ -16,6 +16,9 @@
     <p id="texthere" class="centerP">
         Identify the objects in this image
     </p>
+    <p id="finished" class="centerP">
+        Thank you for your participation!
+    </p>
         <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
   <br/>
   <p id="checks" class="centerP">
@@ -60,6 +63,7 @@
     var userAns = [];
     document.getElementById("checks").style.display = "none"
     document.getElementById("texthere").style.display = "none"
+    document.getElementById("finished").style.display = "none"
 
     var batch_1 = ["000004", "000005", "000010", "000011", "000012", "000014", "000015", "000017", "000019", "000021", "000023", "000025", "000027", "000030", "000062", "000071", "000072", "000074", "000081", "000083", "000084", "000086", "000092", "000099", "000102", "000110", "000111", "000115", "000117", "000118", "000121", "000128"]
     var batch_2 = ["000001", "000012", "000013", "000018", "000020", "000025", "000026", "000029", "000033", "000035", "000036", "000038", "000039", "000040", "000041", "000068", "000086"]
@@ -104,7 +108,12 @@
                 json : JSON.stringify(output)
             }
           });
-          window.location.href = "identifyEnd.html"
+          //window.location.href = "identifyEnd.html"
+          document.getElementById("checks").style.display = "none"
+          document.getElementById("texthere").style.display = "none"
+          document.getElementById("agree").style.display = "none"
+          document.getElementById("canvas").style.display = "none"
+          document.getElementById("finished").style.display = "block"
 
         }
         else {

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Litter Identification</title>
+</head>
+<body>
+    <link rel="stylesheet" href="styles.css" />
+    <br/><br/><br/>
+    <p id="texthere" class="centerP">
+        Your goal in this task is to identify types of litter in a series of images.
+        <br/><br/>
+        Select all types of litter that are present in the image. There may be multiple objects in a single image.
+        <br/><br/>
+        We ask that you answer the questions as quickly as possible while still being accurate.
+        <br/><br/>
+        If you are still unsure of the classification after trying to identify it, select the "I Don't Know" option.
+        <br/><br/>
+
+    </p>
+
+  <br/>
+    <p class="centerP">
+        <button id="next" class="btn" onclick="next()" style="background-color:#00688B">Begin</button>
+    </p>
+        <!--<button id="clearBtn" class="btn" onclick="clearBoxes()">Clear Boxes</button>-->
+</body>
+</html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    function next() {
+      window.location.href = "identifyBasic.html"
+    }
+
+</script>

@@ -96,7 +96,7 @@
             for (var j = 0; j < checkboxes.length; j++) {
               array.push(checkboxes[j].value)
             }
-            if(array == [])
+            if(array.length == 0)
             {
               alert("You must select an option")
             }
@@ -140,9 +140,7 @@
               for (var j = 0; j < checkboxes.length; j++) {
                 array.push(checkboxes[j].value)
               }
-              console.log(array)
-              console.log(array.length)
-              if(array == []) {
+              if(array.length == 0) {
                 i--
                 alert("You must select an option")
               }

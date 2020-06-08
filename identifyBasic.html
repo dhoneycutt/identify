@@ -132,6 +132,7 @@
 
         }
         else {
+            cont=1
             console.log(++i)
             if(i != 0) {
               times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
@@ -143,6 +144,7 @@
               if(array.length == 0) {
                 i--
                 alert("You must select an option")
+                cont=0
               }
               else {
                 cont=1

@@ -13,52 +13,88 @@
     <div id="canvas">
         <img id="imageID" style="max-height:100%; max-width: 100%" draggable="false" user-select="none" />
     </div>
-    <p id="texthere" class="centerP">
+    <div style="text-align: center;">
+      <div style="display: inline-block; text-align: left;">
+    <p id="texthere" class="leftP">
         Identify the objects in this image
     </p>
+  </div></div>
     <p id="finished" class="centerP">
       <br/><br/><br/>
         Thank you for your participation!
     </p>
         <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
   <br/>
-  <p id="checks" class="centerP">
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+  <p id="checks" class="leftP">
    <input type="checkbox" id="unbrokenGlass" name="unbrokenGlass" value="unbrokenGlass">
-   <label for="unbrokenGlass"> Unbroken Glass</label><br>
+   <label for="unbrokenGlass"> Glass (Unbroken)</label><br>
    <input type="checkbox" id="brokenGlass" name="brokenGlass" value="brokenGlass">
-   <label for="brokenGlass"> Broken Glass</label><br>
+   <label for="brokenGlass"> Glass (Broken)</label><br>
+   <br/>
    <input type="checkbox" id="bagWrapper" name="bagWrapper" value="bagWrapper">
-   <label for="bagWrapper"> Plastic Bag/Wrapper</label><br>
+   <label for="bagWrapper"> Plastic (Bag/Wrapper)</label><br>
    <input type="checkbox" id="plasticContainer" name="plasticContainer" value="plasticContainer">
-   <label for="plasticContainer"> Plastic Container</label><br>
+   <label for="plasticContainer"> Plastic (Container)</label><br>
    <input type="checkbox" id="plastic" name="plastic" value="plastic">
-   <label for="plastic"> Other Plastic</label><br>
+   <label for="plastic"> Plastic (Other)</label><br>
+   <br/>
    <input type="checkbox" id="aluminumCan" name="aluminumCan" value="aluminumCan">
-   <label for="aluminumCan"> Aluminum Can</label><br>
+   <label for="aluminumCan"> Aluminum (Can)</label><br>
    <input type="checkbox" id="aluminum" name="aluminum" value="aluminum">
-   <label for="aluminum"> Other Aluminum</label><br>
+   <label for="aluminum"> Aluminum (Other)</label><br>
+   <br/>
    <input type="checkbox" id="paperBag" name="paperBag" value="paperBag">
-   <label for="paperBag"> Paper Bag</label><br>
+   <label for="paperBag"> Paper (Bag)</label><br>
    <input type="checkbox" id="paper" name="paper" value="paper">
-   <label for="paper"> Other Paper</label><br>
+   <label for="paper"> Paper (Other)</label><br>
+   <br/>
    <input type="checkbox" id="food" name="food" value="food">
    <label for="food"> Food Waste</label><br>
+   <br/>
    <input type="checkbox" id="other" name="other" value="other">
    <label for="other"> Other Trash</label><br>
    <input type="checkbox" id="dontknow" name="dontknow" value="dontknow">
    <label for="dontknow"> I Don't Know</label><br>
 
   </p>
+</div>
+</div>
   <br/>
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
     <p class="centerP">
         <button id="agree" class="btn" onclick="answer()" style="background-color:#00688B">Continue</button>
     </p>
+  </div></div>
         <!--<button id="clearBtn" class="btn" onclick="clearBoxes()">Clear Boxes</button>-->
 </body>
 </html>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
+
+    function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+    }
+    var group = getUrlVars()["group"];
+
+    // Execute a function when the user releases a key on the keyboard
+    document.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("agree").click();
+      }
+    });
+
     var i = -1;
     var delay = false;
     var userAns = [];
@@ -72,7 +108,20 @@
     var batch_4 = ["000007", "000015", "000023", "000026", "000039", "000053", "000068", "000079", "000080", "000082"]
     var batch_5 = ["000000", "000011", "000013", "000025", "000027", "000036", "000039", "000052", "000064", "000070", "000079", "000092", "000098", "000099", "000102"]
     var batch_6 = ["000000", "000006", "000014", "000018", "000027", "000032", "000034", "000036", "000052", "000055", "000062", "000064", "000066", "000082", "000083", "000087", "000094", "000099", "000101", "000102"]
-    var imageArr = ["batch_1/000010","batch_1/000019","batch_1/000005","batch_1/000012","batch_1/000014","batch_1/000011","batch_1/000021","batch_1/000023","batch_1/000027","batch_1/000030","batch_1/000015","batch_1/000017","batch_1/000025","batch_1/000071","batch_1/000072","batch_1/000074","batch_1/000081","batch_1/000083","batch_1/000084","batch_1/000086","batch_1/000092","batch_1/000062","batch_1/000099","batch_1/000102","batch_1/000110","batch_1/000111","batch_1/000115","batch_1/000117","batch_1/000118","batch_1/000119","batch_1/000121","batch_1/000004","batch_1/000128","batch_14/000022","batch_14/000049","batch_14/000097","batch_15/000016","batch_15/000022","batch_15/000036","batch_15/000066","batch_2/000001","batch_2/000012","batch_2/000013","batch_2/000018","batch_2/000019","batch_2/000020","batch_2/000022","batch_2/000025","batch_2/,00029","batch_2/000033","batch_2/000035","batch_2/000036","batch_2/000038","batch_2/000039","batch_2/000040","batch_2/000041","batch_2/000068","batch_2/000069","batch_2/000077","batch_2/000086","batch_3/IMG_4978","batch_3/IMG_4994","batch_3/IMG_4997","batch_3/IMG_5055","batch_3/IMG_5057","batch_3/IMG_4855","batch_3/IMG_4862","batch_3/IMG_4893","batch_3/IMG_4902","batch_3/IMG_4924","batch_3/IMG_4941","batch_3/IMG_4963","batch_3/IMG_4967","batch_3/IMG_4969","batch_3/IMG_4948","batch_4/000007","batch_4/000015","batch_4/000023","batch_4/000026","batch_4/000039","batch_4/000053","batch_4/000054","batch_4/000068","batch_4/000079","batch_4/000080","batch_4/000082","batch_5/000079","batch_5/000092","batch_5/000098","batch_5/000099","batch_5/000064","batch_5/000070","batch_5/000102","batch_5/000000","batch_5/000011","batch_5/000013.,PG","batch_5/000024","batch_5/000025","batch_5/000027","batch_5/000036","batch_5/000039","batch_5/000052","batch_6/000052","batch_6/000102","batch_6/000101","batch_6/000099","batch_6/000094","batch_6/000087","batch_6/000083","batch_6/000082","batch_6/000066","batch_6/000064","batch_6/000062","batch_6/000055","batch_6/000000","batch_6/000036","batch_6/000034","batch_6/000032","batch_6/000027","batch_6/000022","batch_6/000018","batch_6/000014","batch_6/000006","batch_7/000013","batch_7/000080","batch_7/000081","batch_7/000083","batch_8/000008","batch_9/000000"]
+    console.log(group)
+    if (group == "1") {
+      var imageArr = ["batch_1/000010","batch_1/000019","batch_1/000005","batch_1/000012","batch_1/000014","batch_1/000011","batch_1/000021","batch_1/000023","batch_1/000027","batch_1/000030","batch_1/000015","batch_1/000017","batch_1/000025","batch_1/000071","batch_1/000072","batch_1/000074","batch_1/000081","batch_1/000083","batch_1/000084","batch_1/000086","batch_1/000092","batch_1/000062","batch_1/000099","batch_1/000102","batch_1/000110","batch_1/000111","batch_1/000115","batch_1/000117","batch_1/000118","batch_1/000119","batch_1/000121","batch_1/000004","batch_1/000128","batch_14/000022","batch_14/000049","batch_14/000097","batch_15/000016","batch_15/000022","batch_15/000036","batch_15/000066","batch_2/000001","batch_2/000012","batch_2/000013"]
+    }
+    else if (group == "2") {
+      var imageArr = ["batch_2/000018","batch_2/000019","batch_2/000020","batch_2/000022","batch_2/000025","batch_2/,00029","batch_2/000033","batch_2/000035","batch_2/000036","batch_2/000038","batch_2/000039","batch_2/000040","batch_2/000041","batch_2/000068","batch_2/000069","batch_2/000077","batch_2/000086","batch_3/IMG_4978","batch_3/IMG_4994","batch_3/IMG_4997","batch_3/IMG_5055","batch_3/IMG_5057","batch_3/IMG_4855","batch_3/IMG_4862","batch_3/IMG_4893","batch_3/IMG_4902","batch_3/IMG_4924","batch_3/IMG_4941","batch_3/IMG_4963","batch_3/IMG_4967","batch_3/IMG_4969","batch_3/IMG_4948","batch_4/000007","batch_4/000015","batch_4/000023","batch_4/000026","batch_4/000039","batch_4/000053","batch_4/000054","batch_4/000068","batch_4/000079","batch_4/000080"]
+    }
+    else {
+      var imageArr = ["batch_4/000082","batch_5/000079","batch_5/000092","batch_5/000098","batch_5/000099","batch_5/000064","batch_5/000070","batch_5/000102","batch_5/000000","batch_5/000011","batch_5/000013.,PG","batch_5/000024","batch_5/000025","batch_5/000027","batch_5/000036","batch_5/000039","batch_5/000052","batch_6/000052","batch_6/000102","batch_6/000101","batch_6/000099","batch_6/000094","batch_6/000087","batch_6/000083","batch_6/000082","batch_6/000066","batch_6/000064","batch_6/000062","batch_6/000055","batch_6/000000","batch_6/000036","batch_6/000034","batch_6/000032","batch_6/000027","batch_6/000022","batch_6/000018","batch_6/000014","batch_6/000006","batch_7/000013","batch_7/000080","batch_7/000081","batch_7/000083","batch_8/000008","batch_9/000000"]
+    }
+
+
+
+
     var times = []
     //var numImages = batch_1.length + batch_2.length + batch_3.length + batch_4.length + batch_5.length + batch_6.length
     var numImages = imageArr.length
@@ -113,6 +162,7 @@
             //Push files to server
             output = {}
             output.id = "P" + Math.random().toString(36).substr(2, 9);
+            output.group = group;
             output.times = times;
             output.userAns = userAns;
             $.ajax({

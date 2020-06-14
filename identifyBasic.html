@@ -13,46 +13,61 @@
     <div id="canvas">
         <img id="imageID" style="max-height:100%; max-width: 100%" draggable="false" user-select="none" />
     </div>
-    <p id="texthere" class="centerP">
+    <div style="text-align: center;">
+      <div style="display: inline-block; text-align: left;">
+    <p id="texthere" class="leftP">
         Identify the objects in this image
     </p>
+  </div></div>
     <p id="finished" class="centerP">
       <br/><br/><br/>
         Thank you for your participation!
     </p>
         <!--<button id="prevBtn" class="btn" onclick="prevImg()">Previous Image</button>-->
   <br/>
-  <p id="checks" class="centerP">
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+  <p id="checks" class="leftP">
    <input type="checkbox" id="unbrokenGlass" name="unbrokenGlass" value="unbrokenGlass">
-   <label for="unbrokenGlass"> Unbroken Glass</label><br>
+   <label for="unbrokenGlass"> Glass (Unbroken)</label><br>
    <input type="checkbox" id="brokenGlass" name="brokenGlass" value="brokenGlass">
-   <label for="brokenGlass"> Broken Glass</label><br>
+   <label for="brokenGlass"> Glass (Broken)</label><br>
+   <br/>
    <input type="checkbox" id="bagWrapper" name="bagWrapper" value="bagWrapper">
-   <label for="bagWrapper"> Plastic Bag/Wrapper</label><br>
+   <label for="bagWrapper"> Plastic (Bag/Wrapper)</label><br>
    <input type="checkbox" id="plasticContainer" name="plasticContainer" value="plasticContainer">
-   <label for="plasticContainer"> Plastic Container</label><br>
+   <label for="plasticContainer"> Plastic (Container)</label><br>
    <input type="checkbox" id="plastic" name="plastic" value="plastic">
-   <label for="plastic"> Other Plastic</label><br>
+   <label for="plastic"> Plastic (Other)</label><br>
+   <br/>
    <input type="checkbox" id="aluminumCan" name="aluminumCan" value="aluminumCan">
-   <label for="aluminumCan"> Aluminum Can</label><br>
+   <label for="aluminumCan"> Aluminum (Can)</label><br>
    <input type="checkbox" id="aluminum" name="aluminum" value="aluminum">
-   <label for="aluminum"> Other Aluminum</label><br>
+   <label for="aluminum"> Aluminum (Other)</label><br>
+   <br/>
    <input type="checkbox" id="paperBag" name="paperBag" value="paperBag">
-   <label for="paperBag"> Paper Bag</label><br>
+   <label for="paperBag"> Paper (Bag)</label><br>
    <input type="checkbox" id="paper" name="paper" value="paper">
-   <label for="paper"> Other Paper</label><br>
+   <label for="paper"> Paper (Other)</label><br>
+   <br/>
    <input type="checkbox" id="food" name="food" value="food">
    <label for="food"> Food Waste</label><br>
+   <br/>
    <input type="checkbox" id="other" name="other" value="other">
    <label for="other"> Other Trash</label><br>
    <input type="checkbox" id="dontknow" name="dontknow" value="dontknow">
    <label for="dontknow"> I Don't Know</label><br>
 
   </p>
+</div>
+</div>
   <br/>
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
     <p class="centerP">
         <button id="agree" class="btn" onclick="answer()" style="background-color:#00688B">Continue</button>
     </p>
+  </div></div>
         <!--<button id="clearBtn" class="btn" onclick="clearBoxes()">Clear Boxes</button>-->
 </body>
 </html>

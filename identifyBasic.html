@@ -28,31 +28,18 @@
   <div style="text-align: center;">
     <div style="display: inline-block; text-align: left;">
   <p id="checks" class="leftP">
-   <input type="checkbox" id="unbrokenGlass" name="unbrokenGlass" value="unbrokenGlass">
-   <label for="unbrokenGlass"> Glass (Unbroken)</label><br>
-   <input type="checkbox" id="brokenGlass" name="brokenGlass" value="brokenGlass">
-   <label for="brokenGlass"> Glass (Broken)</label><br>
-   <br/>
-   <input type="checkbox" id="bagWrapper" name="bagWrapper" value="bagWrapper">
-   <label for="bagWrapper"> Plastic (Bag/Wrapper)</label><br>
-   <input type="checkbox" id="plasticContainer" name="plasticContainer" value="plasticContainer">
-   <label for="plasticContainer"> Plastic (Container)</label><br>
+   <input type="checkbox" id="glass" name="glass" value="glass">
+   <label for="glass"> Glass</label><br>
    <input type="checkbox" id="plastic" name="plastic" value="plastic">
-   <label for="plastic"> Plastic (Other)</label><br>
-   <br/>
-   <input type="checkbox" id="aluminumCan" name="aluminumCan" value="aluminumCan">
-   <label for="aluminumCan"> Aluminum (Can)</label><br>
+   <label for="plastic"> Plastic</label><br>
    <input type="checkbox" id="aluminum" name="aluminum" value="aluminum">
-   <label for="aluminum"> Aluminum (Other)</label><br>
-   <br/>
-   <input type="checkbox" id="paperBag" name="paperBag" value="paperBag">
-   <label for="paperBag"> Paper (Bag)</label><br>
+   <label for="aluminum"> Aluminum</label><br>
    <input type="checkbox" id="paper" name="paper" value="paper">
-   <label for="paper"> Paper (Other)</label><br>
-   <br/>
+   <label for="paper"> Paper</label><br>
+   <input type="checkbox" id="cardboard" name="cardboard" value="cardboard">
+   <label for="cardboard"> Cardboard</label><br>
    <input type="checkbox" id="food" name="food" value="food">
    <label for="food"> Food Waste</label><br>
-   <br/>
    <input type="checkbox" id="other" name="other" value="other">
    <label for="other"> Other Trash</label><br>
    <input type="checkbox" id="dontknow" name="dontknow" value="dontknow">
@@ -128,8 +115,6 @@
     console.log(numImages)
     document.getElementById("imageID").src = "images/ready.jpg"
 
-    var today = new Date();
-
     function answer() {
       if (delay == false) {
         userDiff = 0
@@ -141,6 +126,7 @@
       cont=0
         if (i == numImages - 1) {
           if(i != 0) {
+            var today = new Date();
             times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
             var array = []
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')

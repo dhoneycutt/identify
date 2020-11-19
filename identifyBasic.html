@@ -173,6 +173,7 @@
             cont=1
             console.log(++i)
             if(i != 0) {
+              var today = new Date();
               times.push(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
               var array = []
               var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
